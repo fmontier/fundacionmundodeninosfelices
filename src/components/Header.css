@@ -1,0 +1,46 @@
+.header {
+  padding: 2rem 1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  animation: fadeInDown 1s ease-out;
+}
+
+.logo-icon {
+  font-size: 3rem;
+  color: #ff6b6b;
+  animation: heartbeat 2s infinite;
+}
+
+.logo-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .logo-title {
+    font-size: 1.8rem;
+  }
+}

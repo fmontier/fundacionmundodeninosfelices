@@ -1,115 +1,246 @@
-# Fundación Mundo de Niños Felices - Sitio Web
+# Fundación Mundo de Niños Felices - Aplicación React
 
 ## Descripción
-Sitio web estático "en construcción" para fundacionmundodeninosfelices.org
+Aplicación React moderna con Vite para fundacionmundodeninosfelices.org
 
-## Archivos incluidos
+## 🚀 Tecnologías
+- **React 18** - Biblioteca de UI
+- **Vite** - Build tool y dev server
+- **JavaScript (ES6+)** - Lenguaje de programación
+- **CSS3** - Estilos con animaciones
+- **Font Awesome** - Iconos
+- **Google Fonts** - Tipografías
 
-### `index.html`
-Página principal con:
-- Diseño responsive y moderno
-- Mensaje de "sitio en construcción"
-- Información sobre la fundación
-- Secciones de características y próximas funcionalidades
-- Enlaces a redes sociales (preparados para el futuro)
+## 📁 Estructura del proyecto
 
-### `styles.css`
-Estilos CSS con:
-- Diseño responsive (mobile-first)
-- Animaciones suaves y atractivas
-- Gradientes y efectos visuales modernos
-- Tema colorido apropiado para una fundación infantil
-- Compatibilidad con diferentes dispositivos
+```
+fundacionmundodeninosfelices/
+├── public/                 # Archivos estáticos
+├── src/
+│   ├── components/        # Componentes React
+│   │   ├── Header.jsx
+│   │   ├── ConstructionContent.jsx
+│   │   ├── AnimationContainer.jsx
+│   │   ├── FeatureSection.jsx
+│   │   ├── ComingSoonSection.jsx
+│   │   └── Footer.jsx
+│   ├── hooks/            # Hooks personalizados
+│   │   └── useAnimations.js
+│   ├── styles/           # Estilos globales
+│   │   └── index.css
+│   ├── App.jsx           # Componente principal
+│   └── main.jsx          # Punto de entrada
+├── index.html            # HTML base
+├── vite.config.js        # Configuración de Vite
+├── package.json          # Dependencias
+└── README.md
+```
 
-### `script.js`
-JavaScript para interactividad:
-- Partículas flotantes animadas (emojis)
-- Efectos hover en elementos
-- Indicador de progreso animado
-- Efectos de click en botones sociales
-- Mensajes temporales
-- Efectos de parallax suave
+## 🛠️ Comandos disponibles
 
-## Características del sitio
+### Desarrollo local
+```bash
+# Instalar dependencias
+npm install
 
-### Diseño
-- **Tema**: Colorido y alegre, apropiado para una fundación de niños
-- **Colores principales**: Azules, rosas, amarillos y verdes suaves
-- **Tipografía**: Fredoka One para títulos, Nunito para texto
-- **Iconos**: Font Awesome para íconos profesionales
+# Servidor de desarrollo (puerto 3000)
+npm run dev
 
-### Responsividad
-- Adaptado para desktop, tablet y móvil
-- Breakpoints en 768px y 480px
-- Grid system flexible
-- Imágenes y texto escalables
+# Servidor de desarrollo con red local
+npm run dev -- --host
+```
 
-### Animaciones
+### Construcción y despliegue
+```bash
+# Build para producción
+npm run build
+
+# Preview del build
+npm run preview
+
+# Linting
+npm run lint
+```
+
+## 🌐 Desarrollo local
+
+### Método 1: NPM (Recomendado)
+```bash
+cd /Users/fernandomontero/desa/fundacionmundodeninosfelices
+
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
+npm run dev
+```
+
+Abre: `http://localhost:3000`
+
+### Método 2: Con red local (para móviles)
+```bash
+npm run dev -- --host
+```
+
+Luego usa tu IP local desde cualquier dispositivo en la misma red.
+
+## ☁️ Despliegue en Azure Static Web Apps
+
+### Configuración para Azure
+
+El proyecto incluye:
+- **`staticwebapp.config.json`** - Configuración de Azure
+- **`package.json`** - Scripts de build
+- **`vite.config.js`** - Optimizaciones de build
+
+### Steps para Azure:
+
+1. **Build settings en Azure**:
+   - **App location**: `/`
+   - **Api location**: `` (vacío)
+   - **Output location**: `dist`
+   - **Build command**: `npm run build`
+
+2. **GitHub Actions automático**:
+   ```yaml
+   # Azure creará automáticamente un workflow similar a:
+   name: Azure Static Web Apps CI/CD
+   
+   on:
+     push:
+       branches: [ main ]
+   
+   jobs:
+     build_and_deploy_job:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v2
+         - name: Build And Deploy
+           uses: Azure/static-web-apps-deploy@v1
+           with:
+             app_location: "/"
+             output_location: "dist"
+             app_build_command: "npm run build"
+   ```
+
+## 🎨 Características de la aplicación
+
+### Componentes principales
+- **Header** - Logo y título animado
+- **ConstructionContent** - Contenido principal
+- **AnimationContainer** - Animaciones flotantes
+- **FeatureSection** - Características con hover
+- **ComingSoonSection** - Lista de próximas funciones
+- **Footer** - Enlaces sociales y copyright
+
+### Hooks personalizados
+- **useFloatingParticles** - Partículas animadas
+- **useProgressAnimation** - Barra de progreso
+- **useWelcomeMessage** - Mensajes temporales
+
+### Animaciones CSS
 - Entrada suave de elementos
-- Partículas flotantes continuas
 - Efectos hover interactivos
-- Barra de progreso animada
+- Partículas flotantes
 - Gradientes animados
+- Efectos de ripple en clicks
 
-## Instrucciones de uso
+## 📱 Responsive Design
+- **Desktop**: Grid de 3 columnas
+- **Tablet**: Grid de 2 columnas  
+- **Móvil**: Columna única
+- **Breakpoints**: 768px y 480px
 
-### Para desarrollo local
-1. Abrir `index.html` en cualquier navegador web moderno
-2. No requiere servidor web (sitio estático)
-3. Todas las dependencias externas están enlazadas via CDN
+## ⚡ Optimizaciones
 
-### Para producción
-1. Subir todos los archivos al servidor web
-2. Configurar `index.html` como página de inicio
-3. Asegurar que el dominio apunte a fundacionmundodeninosfelices.org
+### Vite optimizations
+- **Hot Module Replacement** (HMR)
+- **Tree shaking** automático
+- **Code splitting** por chunks
+- **Asset optimization**
+- **Build minificado**
 
-### Personalización
-- **Colores**: Modificar variables CSS en `styles.css`
-- **Contenido**: Editar texto en `index.html`
-- **Animaciones**: Ajustar en `script.js`
-- **Redes sociales**: Actualizar enlaces en el footer
+### Performance
+- Lazy loading de componentes
+- Componentes memoizados donde necesario
+- CSS optimizado por Vite
+- Imágenes y assets optimizados
 
-## Próximos pasos sugeridos
+## 🔧 Configuración de desarrollo
 
-1. **Contenido**:
-   - Agregar logo real de la fundación
-   - Incluir imágenes auténticas de la organización
-   - Añadir información de contacto real
+### VS Code recomendado
+Extensiones:
+- ES7+ React/Redux/React-Native snippets
+- Prettier - Code formatter
+- ESLint
+- Auto Rename Tag
+- Bracket Pair Colorizer
 
-2. **Funcionalidades**:
-   - Formulario de contacto
-   - Newsletter signup
-   - Galería de fotos
-   - Blog/noticias
-   - Sistema de donaciones
+### Scripts útiles
+```bash
+# Análisis del bundle
+npm run build && npx vite-bundle-analyzer dist
 
-3. **SEO**:
-   - Meta tags específicos
-   - Structured data
-   - Sitemap XML
-   - Google Analytics
+# Servidor con HTTPS local
+npm run dev -- --https
 
-4. **Optimización**:
-   - Comprimir imágenes
-   - Minificar CSS/JS
-   - Implementar cache
-   - CDN para recursos
+# Build con análisis
+npm run build -- --mode development
+```
 
-## Tecnologías utilizadas
-- HTML5 semántico
-- CSS3 con Flexbox y Grid
-- JavaScript ES6+
-- Font Awesome (iconos)
-- Google Fonts (tipografía)
+## 🚦 Estados de la aplicación
 
-## Compatibilidad
-- Chrome 70+
-- Firefox 65+
-- Safari 12+
-- Edge 79+
-- Dispositivos móviles iOS/Android
+### Desarrollo
+- Hot reload activado
+- Source maps completos
+- Mensajes de error detallados
+
+### Producción
+- Bundle minificado
+- Assets optimizados
+- Source maps deshabilitados
+- Cache headers optimizados
+
+## 📊 Métricas y monitoreo
+
+### Build size
+- **Vendors chunk**: ~150KB (React + dependencies)
+- **Main chunk**: ~50KB (componentes de la app)
+- **CSS**: ~15KB (estilos compilados)
+
+### Performance targets
+- **First Contentful Paint**: < 1.5s
+- **Largest Contentful Paint**: < 2.5s
+- **Time to Interactive**: < 3s
+
+## 🆘 Troubleshooting
+
+### Error: dependencias no encontradas
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Error: puerto ocupado
+```bash
+npm run dev -- --port 3001
+```
+
+### Error: hot reload no funciona
+```bash
+# Verificar que estés en la carpeta correcta
+pwd
+# Debería mostrar: /Users/fernandomontero/desa/fundacionmundodeninosfelices
+```
+
+## 🔄 Flujo de trabajo
+
+1. **Desarrollo local**: `npm run dev`
+2. **Commit changes**: `git add . && git commit -m "mensaje"`
+3. **Push a GitHub**: `git push origin main`
+4. **Azure build automático**: ~2-3 minutos
+5. **Sitio actualizado**: URL de Azure actualizada
 
 ---
 
-**Fundación Mundo de Niños Felices**  
-*Construyendo sueños, creando sonrisas*
+**¡Tu aplicación React está lista para desarrollo y despliegue!** 🎉
