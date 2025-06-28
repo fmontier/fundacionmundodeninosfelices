@@ -1,0 +1,42 @@
+{
+  "siteName": "Fundación Mundo de Niños Felices",
+  "domain": "fundacionmundodeninosfelices.org",
+  "version": "1.0.0",
+  "status": "under-construction",
+  "language": "es",
+  "description": "Sitio web oficial de la Fundación Mundo de Niños Felices - Construyendo sueños, creando sonrisas",
+  "keywords": ["fundación", "niños", "caridad", "ayuda", "donaciones", "colombia"],
+  "author": "Fundación Mundo de Niños Felices",
+  "created": "2025-06-28",
+  "theme": {
+    "primaryColor": "#ff6b6b",
+    "secondaryColor": "#667eea",
+    "accentColor": "#6bcf7f",
+    "backgroundColor": "#667eea",
+    "textColor": "#333333"
+  },
+  "features": {
+    "responsive": true,
+    "animations": true,
+    "socialMedia": true,
+    "newsletter": false,
+    "donations": false,
+    "blog": false,
+    "gallery": false,
+    "contact": false
+  },
+  "socialMedia": {
+    "facebook": "",
+    "instagram": "",
+    "twitter": "",
+    "linkedin": "",
+    "youtube": ""
+  },
+  "contact": {
+    "email": "",
+    "phone": "",
+    "address": "",
+    "city": "Bogotá",
+    "country": "Colombia"
+  }
+}
