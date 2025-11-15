@@ -1,37 +1,1160 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fundación Mundo de Niños Felices - Construyendo sueños, creando sonrisas" />
-    <meta name="keywords" content="fundación, niños, caridad, ayuda, donaciones, colombia" />
-    <meta name="author" content="Fundación Mundo de Niños Felices" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://fundacionmundodeninosfelices.org/" />
-    <meta property="og:title" content="Fundación Mundo de Niños Felices" />
-    <meta property="og:description" content="Construyendo sueños, creando sonrisas" />
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://fundacionmundodeninosfelices.org/" />
-    <meta property="twitter:title" content="Fundación Mundo de Niños Felices" />
-    <meta property="twitter:description" content="Construyendo sueños, creando sonrisas" />
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <title>Fundación Mundo de Niños Felices - Sitio en Construcción</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundación Construyendo Mundos Felices</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        /* Mode Toggle Buttons */
+        .mode-toggle {
+            display: flex;
+            gap: 10px;
+            margin-right: 20px;
+            padding: 5px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 25px;
+        }
+
+        .mode-btn {
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            background: transparent;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .mode-btn:hover:not(.active) {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .nav-btn {
+            position: relative;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-btn:hover::before {
+            width: 100%;
+        }
+
+        .nav-btn:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            color: #667eea;
+        }
+
+        .nav-btn.active::before {
+            width: 100%;
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s forwards;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* SVG Container */
+        .svg-main-container {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .svg-container {
+            padding: 20px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .svg-wrapper {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .svg-wrapper:hover {
+            transform: scale(1.01);
+        }
+
+        /* Quick navigation for SVG */
+        .svg-quick-nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: none;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .svg-quick-nav.visible {
+            display: flex;
+        }
+
+        .svg-nav-btn {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .svg-nav-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Highlight effect */
+        .highlight-section {
+            position: absolute;
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 10;
+        }
+
+        .highlight-section.active {
+            opacity: 1;
+            animation: pulse 2s infinite;
+        }
+
+        /* Cards for sub-sections */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Contact Form Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-info-item i {
+            font-size: 20px;
+            margin-right: 15px;
+            width: 30px;
+        }
+
+        .contact-form {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Social Links */
+        .social-links {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: white;
+            color: #667eea;
+            transform: scale(1.1);
+        }
+
+        /* Interactive elements */
+        .interactive-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .interactive-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Animations */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+            }
+        }
+
+        /* Modal for detailed information */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 600px;
+            animation: slideDown 0.3s;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #667eea;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeInUp 0.5s;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Map Container */
+        .map-container {
+            margin-top: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            background: #f0f0f0;
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-direction: row;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .nav-btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .main-container {
+                margin-top: 100px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .section-content {
+                font-size: 16px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                order: 2;
+            }
+
+            .contact-form {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <div class="logo" onclick="scrollToTop()">Fundación CMF</div>
+            <div class="nav-buttons">
+                <div class="mode-toggle">
+                    <button class="mode-btn active" onclick="setMode('navigation')">Navegación</button>
+                    <button class="mode-btn" onclick="setMode('detail')">Detalle</button>
+                </div>
+                <button class="nav-btn" onclick="handleNavClick('contacto')">Contacto</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- SVG Original -->
+        <div id="inicio" class="content-section active">
+            <div class="svg-quick-nav" id="svgQuickNav">
+                <button class="svg-nav-btn" onclick="scrollToSVGSection('historia')">Historia</button>
+                <button class="svg-nav-btn" onclick="scrollToSVGSection('quienes-somos')">Quiénes Somos</button>
+                <button class="svg-nav-btn" onclick="scrollToSVGSection('politica')">Política</button>
+                <button class="svg-nav-btn" onclick="scrollToSVGSection('valores')">Valores</button>
+                <button class="svg-nav-btn" onclick="scrollToSVGSection('codigo')">Código de Ética</button>
+            </div>
+
+            <div class="svg-main-container">
+                <div class="svg-container" id="svgContainer">
+                    <div class="highlight-section" id="highlightSection"></div>
+                    <div class="svg-wrapper">
+                        <object data="site.svg" type="image/svg+xml" width="100%" height="100%" id="svg-object">
+                            <img src="site.svg" alt="Fundación Construyendo Mundos Felices" style="width: 100%; height: auto;">
+                        </object>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contacto" class="content-section">
+            <h2 class="section-title">Contacto</h2>
+            <div class="section-content">
+                <p>Estamos aquí para escucharte. Si deseas colaborar, ser voluntario, hacer una donación o simplemente conocer más sobre nuestro trabajo, no dudes en contactarnos.</p>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre *</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellido">Apellido *</label>
+                                <input type="text" id="apellido" name="apellido" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="+57 300 123 4567">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="asunto">Asunto *</label>
+                            <select id="asunto" name="asunto" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="voluntariado">Quiero ser voluntario</option>
+                                <option value="donacion">Realizar una donación</option>
+                                <option value="colaboracion">Propuesta de colaboración</option>
+                                <option value="informacion">Solicitar información</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos cómo podemos ayudarte o cómo te gustaría colaborar con nosotros..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                    </form>
+
+                    <div class="success-message" id="successMessage">
+                        ¡Gracias por contactarnos! Hemos recibido tu mensaje y te responderemos pronto.
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+
+                    <div class="contact-info-item">
+                        <i>📍</i>
+                        <div>
+                            <strong>Dirección:</strong><br>
+                            Localidad de Fontibón<br>
+                            Bogotá, Colombia
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <i>📧</i>
+                        <div>
+                            <strong>Email:</strong><br>
+                            info@fundacioncmf.org<br>
+                            contacto@fundacioncmf.org
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <i>📞</i>
+                        <div>
+                            <strong>Teléfono:</strong><br>
+                            +57 (1) 234 5678<br>
+                            +57 300 123 4567
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <i>🕐</i>
+                        <div>
+                            <strong>Horario de Atención:</strong><br>
+                            Lunes a Viernes: 8:00 AM - 6:00 PM<br>
+                            Sábados: 9:00 AM - 1:00 PM
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <h4>Síguenos en Redes Sociales</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" title="Facebook">
+                                <span>f</span>
+                            </a>
+                            <a href="#" class="social-icon" title="Instagram">
+                                <span>📷</span>
+                            </a>
+                            <a href="#" class="social-icon" title="Twitter">
+                                <span>𝕏</span>
+                            </a>
+                            <a href="#" class="social-icon" title="LinkedIn">
+                                <span>in</span>
+                            </a>
+                            <a href="#" class="social-icon" title="YouTube">
+                                <span>▶</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <div class="map-placeholder">
+                            <span>📍 Mapa de ubicación - Fontibón, Bogotá</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        // Current mode: 'navigation' or 'detail'
+        let currentMode = 'navigation';
+
+        // SVG section positions (percentage from top)
+        const svgSectionPositions = {
+            'historia': 11,
+            'quienes-somos': 20,
+            'politica': 40,
+            'valores': 46,
+            'codigo': 73
+        };
+
+        // Content for modals
+        const modalContent = {
+            'historia': {
+                title: '📚 Nuestra Historia',
+                content: `<p>La Fundación Construyendo Mundos Felices nació el 14 de marzo de 2025 en la localidad de Fontibón, Bogotá.</p>
+                         <p>Fue constituida por Andrea Barreto Hernández, Adriana María Basto Bermúdez, Daniela Hernández y Juan Sebastián Acuña Barreto,
+                         personas con sólidos conocimientos, gran vocación de servicio y un firme compromiso con el bienestar colectivo.</p>
+                         <p>Desde nuestros inicios, hemos trabajado incansablemente para mejorar las condiciones de vida de las poblaciones más vulnerables.</p>`
+            },
+            'equipo': {
+                title: '👥 Nuestro Equipo',
+                content: `<p>Contamos con un equipo multidisciplinario de profesionales comprometidos:</p>
+                         <ul>
+                            <li><strong>Andrea Barreto Hernández</strong> - Fundadora</li>
+                            <li><strong>Adriana María Basto Bermúdez</strong> - Fundadora</li>
+                            <li><strong>Daniela Hernández</strong> - Fundadora</li>
+                            <li><strong>Juan Sebastián Acuña Barreto</strong> - Fundador</li>
+                         </ul>
+                         <p>Además, contamos con voluntarios y colaboradores de distintas áreas profesionales.</p>`
+            },
+            'valores': {
+                title: '💎 Nuestros Valores',
+                content: `<ul>
+                            <li><strong>Compromiso:</strong> Trabajamos con determinación y entrega por el bienestar de quienes más lo necesitan.</li>
+                            <li><strong>Solidaridad:</strong> Promovemos el apoyo mutuo como base de nuestras acciones sociales.</li>
+                            <li><strong>Equidad:</strong> Garantizamos trato justo, sin discriminación, priorizando la inclusión.</li>
+                            <li><strong>Transparencia:</strong> Actuamos con ética, claridad y responsabilidad.</li>
+                            <li><strong>Trabajo en equipo:</strong> Fomentamos la colaboración para construir soluciones colectivas.</li>
+                         </ul>`
+            },
+            'mas-nosotros': {
+                title: '🏢 Más sobre la Fundación',
+                content: `<p>Nuestra sede principal se encuentra en Fontibón, Bogotá, desde donde coordinamos todas nuestras actividades.</p>
+                         <p>Trabajamos con aliados estratégicos del sector público y privado para maximizar nuestro impacto social.</p>
+                         <p>Implementamos procesos de mejora continua y formación constante de nuestro equipo.</p>`
+            },
+            'futuro': {
+                title: '🚀 Nuestro Futuro',
+                content: `<p>Proyectamos expandir nuestras operaciones a nivel nacional para 2030.</p>
+                         <p>Planeamos implementar nuevos programas en educación digital, emprendimiento social y desarrollo sostenible.</p>
+                         <p>Buscamos establecer alianzas internacionales para intercambio de conocimientos y recursos.</p>`
+            },
+            'innovacion': {
+                title: '💡 Innovación Social',
+                content: `<p>Implementamos tecnologías digitales para ampliar nuestro alcance e impacto.</p>
+                         <p>Desarrollamos metodologías participativas que involucran directamente a las comunidades.</p>
+                         <p>Creamos soluciones innovadoras adaptadas a las necesidades específicas de cada población.</p>`
+            },
+            'sostenibilidad': {
+                title: '🌱 Sostenibilidad',
+                content: `<p>Diseñamos proyectos que generan autonomía en las comunidades beneficiadas.</p>
+                         <p>Promovemos la economía circular y el cuidado del medio ambiente.</p>
+                         <p>Establecemos modelos de negocio social que garantizan la continuidad de nuestros programas.</p>`
+            },
+            'estrategia': {
+                title: '📈 Estrategia 2025-2030',
+                content: `<p><strong>Fase 1 (2025-2026):</strong> Consolidación local en Bogotá y municipios aledaños.</p>
+                         <p><strong>Fase 2 (2027-2028):</strong> Expansión regional a principales ciudades de Colombia.</p>
+                         <p><strong>Fase 3 (2029-2030):</strong> Presencia nacional y reconocimiento internacional.</p>`
+            },
+            'programas': {
+                title: '📋 Nuestros Programas',
+                content: `<ul>
+                            <li><strong>Educación para Todos:</strong> Becas y apoyo escolar para niños vulnerables.</li>
+                            <li><strong>Nutrición Infantil:</strong> Comedores comunitarios y programas de seguridad alimentaria.</li>
+                            <li><strong>Empoderamiento Femenino:</strong> Capacitación para madres cabeza de hogar.</li>
+                            <li><strong>Adulto Mayor Activo:</strong> Actividades recreativas y de salud para la tercera edad.</li>
+                         </ul>`
+            },
+            'beneficiarios': {
+                title: '❤️ Nuestros Beneficiarios',
+                content: `<p>Atendemos principalmente a:</p>
+                         <ul>
+                            <li>Niños y niñas en situación de vulnerabilidad</li>
+                            <li>Adolescentes en riesgo social</li>
+                            <li>Madres cabeza de hogar</li>
+                            <li>Adultos mayores en condición de abandono</li>
+                         </ul>
+                         <p>Hasta la fecha, hemos impactado positivamente la vida de más de 500 familias.</p>`
+            },
+            'impacto': {
+                title: '📊 Nuestro Impacto',
+                content: `<p><strong>Resultados 2025:</strong></p>
+                         <ul>
+                            <li>100+ niños beneficiados con programas educativos</li>
+                            <li>50+ madres capacitadas en emprendimiento</li>
+                            <li>200+ adultos mayores atendidos</li>
+                            <li>10+ alianzas estratégicas establecidas</li>
+                         </ul>`
+            },
+            'proyectos': {
+                title: '🎯 Proyectos Actuales',
+                content: `<p><strong>Proyectos en ejecución:</strong></p>
+                         <ul>
+                            <li>"Sonrisas del Mañana" - Apoyo integral a la primera infancia</li>
+                            <li>"Mujeres Empoderadas" - Formación empresarial para madres</li>
+                            <li>"Edad Dorada" - Bienestar para adultos mayores</li>
+                            <li>"Juventud con Futuro" - Prevención y formación para adolescentes</li>
+                         </ul>`
+            }
+        };
+
+        // Set mode (Navigation or Detail)
+        function setMode(mode) {
+            currentMode = mode;
+
+            // Update mode button states
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const activeBtn = document.querySelector(`.mode-btn[onclick="setMode('${mode}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Show/hide SVG quick navigation based on mode
+            const svgQuickNav = document.getElementById('svgQuickNav');
+            if (svgQuickNav) {
+                if (mode === 'navigation') {
+                    svgQuickNav.classList.add('visible');
+                } else {
+                    svgQuickNav.classList.remove('visible');
+                }
+            }
+        }
+
+        // Handle navigation button clicks
+        function handleNavClick(section) {
+            if (section === 'contacto') {
+                showSection('contacto');
+            }
+        }
+
+        // Scroll to specific section within SVG
+        function scrollToSVGSection(sectionName) {
+            const svgContainer = document.getElementById('svgContainer');
+            if (!svgContainer) return;
+
+            const position = svgSectionPositions[sectionName];
+            if (position !== undefined) {
+                // Calculate the scroll position based on the SVG container height
+                const containerHeight = svgContainer.scrollHeight;
+                const scrollTo = (containerHeight * position) / 100;
+
+                // Smooth scroll to the section
+                svgContainer.scrollTo({
+                    top: scrollTo,
+                    behavior: 'smooth'
+                });
+
+                // Highlight the section
+                highlightSection(sectionName, position);
+            }
+        }
+
+        // Highlight a section in the SVG
+        function highlightSection(sectionName, position) {
+            const highlight = document.getElementById('highlightSection');
+            const svgContainer = document.getElementById('svgContainer');
+
+            if (!highlight || !svgContainer) return;
+
+            // Position and show the highlight
+            const containerHeight = svgContainer.scrollHeight;
+            const containerWidth = svgContainer.scrollWidth;
+
+            const top = (containerHeight * position) / 100;
+
+            // Set highlight position and size based on section
+            highlight.style.top = `${top}px`;
+            highlight.style.left = '10%';
+            highlight.style.width = '80%';
+            highlight.style.height = '200px';
+
+            // Show highlight
+            highlight.classList.add('active');
+
+            // Hide highlight after 3 seconds
+            setTimeout(() => {
+                highlight.classList.remove('active');
+            }, 3000);
+        }
+
+        // Scroll to top and show SVG
+        function scrollToTop() {
+            showSection('inicio');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Remove active class from contact button
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+        }
+
+        // Show section function
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+                // Force reflow to trigger animation
+                void selectedSection.offsetWidth;
+                selectedSection.classList.add('active');
+            }
+
+            // Update active button
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Activate contact button if contact section is shown
+            if (sectionId === 'contacto') {
+                buttons.forEach(btn => {
+                    if (btn.textContent.toLowerCase() === 'contacto') {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+
+            // Here you would normally send the data to a server
+            console.log('Form data:', data);
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+
+            // Reset form
+            event.target.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+
+            return false;
+        }
+
+        // Modal functions
+        function showModal(contentKey) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+
+            if (modalContent[contentKey]) {
+                modalTitle.innerHTML = modalContent[contentKey].title;
+                modalBody.innerHTML = modalContent[contentKey].content;
+                modal.style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav-container');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Initialize - ensure SVG loads properly
+        window.addEventListener('load', function() {
+            // Initialize mode
+            setMode('navigation');
+
+            // Try to load SVG
+            const objectElement = document.querySelector('object');
+            if (objectElement) {
+                objectElement.addEventListener('load', function() {
+                    try {
+                        const svgDoc = objectElement.contentDocument;
+                        if (svgDoc) {
+                            const svgElement = svgDoc.querySelector('svg');
+                            if (svgElement) {
+                                svgElement.style.width = '100%';
+                                svgElement.style.height = 'auto';
+                            }
+                        }
+                    } catch (e) {
+                        console.log('SVG loaded successfully');
+                    }
+                });
+            }
+        });
+
+        // Form validation
+        document.getElementById('contactForm').addEventListener('input', function(e) {
+            if (e.target.type === 'email') {
+                const email = e.target.value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (email && !emailRegex.test(email)) {
+                    e.target.setCustomValidity('Por favor, ingresa un email válido');
+                } else {
+                    e.target.setCustomValidity('');
+                }
+            }
+
+            if (e.target.type === 'tel') {
+                const phone = e.target.value;
+                const phoneRegex = /^[\d\s\+\-\(\)]+$/;
+
+                if (phone && !phoneRegex.test(phone)) {
+                    e.target.setCustomValidity('Por favor, ingresa solo números y caracteres válidos');
+                } else {
+                    e.target.setCustomValidity('');
+                }
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Press 'ESC' to close modal
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
 </html>
